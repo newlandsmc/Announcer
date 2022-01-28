@@ -32,3 +32,8 @@ Gradient `color-1`, `color-2`, and `color-3` can be color names, hex values etc.
 If `random-message-order` is true, the messages will be randomly selected. Otherwise, they will be sent in order
 
 `fade-in` and `fade-out` are in milliseconds
+
+# Adding more animations
+create a new class implemnenting [Animation](https://github.com/SemiVanilla-MC/Announcer/blob/master/src/main/java/com/semivanilla/announcer/animation/Animation.java) [here](https://github.com/SemiVanilla-MC/Announcer/tree/master/src/main/java/com/semivanilla/announcer/animation/impl)
+
+You will need to modify [TitleManager](https://github.com/SemiVanilla-MC/Announcer/blob/7e0aad77b281c85623daebada69884ea8d82f56c/src/main/java/com/semivanilla/announcer/manager/TitleManager.java#L25) to add support for this animation as it dosen't support multiple animations currently.

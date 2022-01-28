@@ -30,3 +30,5 @@ messages:
 Gradient `color-1`, `color-2`, and `color-3` can be color names, hex values etc... they are used to create a gradient from [this](https://docs.adventure.kyori.net/minimessage#gradient)
 
 If `random-message-order` is true, the messages will be randomly selected. Otherwise, they will be sent in order
+
+`fade-in` and `fade-out` are in milliseconds

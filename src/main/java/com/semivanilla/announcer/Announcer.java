@@ -41,7 +41,7 @@ public final class Announcer extends JavaPlugin {
             MiniMessage m = MiniMessage.get();
             String s = ConfigManager.getNextMessage();
             if (s != null) {
-                Component component = m.parse(s);
+                Component component = m.parse(s.trim());
                 Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(component));
             }
         }, ConfigManager.getTicks(), ConfigManager.getTicks());

@@ -1,12 +1,12 @@
 package com.semivanilla.announcer.manager;
 
+import com.semivanilla.announcer.Announcer;
 import com.semivanilla.announcer.animation.Animation;
 import com.semivanilla.announcer.animation.impl.GradientAnimation;
 import com.semivanilla.announcer.object.TitleInfo;
 import com.semivanilla.announcer.util.UUIDUtil;
 import lombok.Getter;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -58,11 +58,11 @@ public class TitleManager {
                 title = title.replace("<animate>", "<gradient:" + ConfigManager.getColor1() + ":" + ConfigManager.getColor2() + ":" + ConfigManager.getColor3() + ":" + animation.nextValue() + ">").replace("</animate>", "</gradient>");
             else throw new RuntimeException("Missing closing animate tag (</animate> expected)");
         }
-        return MiniMessage.get().parse(title);
+        return Announcer.getMiniMessage().deserialize(title);
     }
 
     public static void showTitle(Player player, Component title, Component subtitle, long fadeIn, int stay, long fadeOut) {
-        Title.Times times = Title.Times.of(Duration.ofMillis(fadeIn), Duration.ofSeconds(stay), Duration.ofMillis(fadeOut));
+        Title.Times times = Title.Times.times(Duration.ofMillis(fadeIn), Duration.ofSeconds(stay), Duration.ofMillis(fadeOut));
         Title t = Title.title(title, subtitle, times);
         player.showTitle(t);
     }

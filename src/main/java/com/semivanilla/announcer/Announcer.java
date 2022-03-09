@@ -23,6 +23,9 @@ public final class Announcer extends JavaPlugin {
     private static ConfigManager configManager;
     private FileConfiguration config = null;
 
+    @Getter
+    private static final MiniMessage miniMessage = MiniMessage.miniMessage();
+
     @Override
     public void onLoad() {
         instance = this;
@@ -38,10 +41,9 @@ public final class Announcer extends JavaPlugin {
         Bukkit.getLogger().info("Loaded (" + ConfigManager.getMessages().size() + ") messages!");
         Bukkit.getPluginManager().registerEvents(new MainListener(), this);
         Tasks.runAsyncTimer(() -> {
-            MiniMessage m = MiniMessage.get();
             String s = ConfigManager.getNextMessage();
             if (s != null) {
-                Component component = m.parse(s.trim());
+                Component component = miniMessage.deserialize(s.trim());
                 Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(component));
             }
         }, ConfigManager.getTicks(), ConfigManager.getTicks());

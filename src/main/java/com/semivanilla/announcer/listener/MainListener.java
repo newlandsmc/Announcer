@@ -11,6 +11,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.geysermc.floodgate.api.FloodgateApi;
 
 import java.io.File;
 import java.util.Set;
@@ -37,7 +38,10 @@ public class MainListener implements Listener {
         } else {
             config = ConfigManager.getReturning();
         }
-        if (config.isEnableTitle()) {
+        if (FloodgateApi.getInstance().isFloodgatePlayer(event.getPlayer().getUniqueId()))
+            return;
+        boolean showTitle = config.isEnableTitle();
+        if (showTitle) {
             TitleManager.showTitle(event.getPlayer(), config.getTitle(), config.getSubtitle(), config.getFadeIn(), config.getTitleDuration(), config.getFadeOut());
         }
         if (config.isEnableSound()) {

@@ -2,3 +2,5 @@ name: Announcer
 version: '${project.version}'
 main: com.semivanilla.announcer.Announcer
 api-version: 1.13
+softdepend:
+  - 'floodgate'

@@ -77,7 +77,11 @@ public class ConfigManager {
                 getConfig().getString("new-player.join-sounds.name"),
                 getConfig().getString("new-player.join-sounds.source"),
                 getConfig().getDouble("new-player.join-sounds.pitch"),
-                getConfig().getDouble("new-player.join-sounds.volume"));
+                getConfig().getDouble("new-player.join-sounds.volume"),
+                getConfig().getBoolean("new-player.title-settings.bedrock.enable"),
+                getConfig().getString("new-player.title-settings.bedrock.title"),
+                getConfig().getString("new-player.title-settings.bedrock.subtitle")
+                );
         returning = new JoinConfig(
                 getConfig().getBoolean("returning-player.join-sounds.enabled"),
                 getConfig().getBoolean("returning-player.title-settings.enabled"),
@@ -89,7 +93,11 @@ public class ConfigManager {
                 getConfig().getString("returning-player.join-sounds.name"),
                 getConfig().getString("returning-player.join-sounds.source"),
                 getConfig().getDouble("returning-player.join-sounds.pitch"),
-                getConfig().getDouble("returning-player.join-sounds.volume"));
+                getConfig().getDouble("returning-player.join-sounds.volume"),
+                getConfig().getBoolean("returning-player.title-settings.bedrock.enable"),
+                getConfig().getString("returning-player.title-settings.bedrock.title"),
+                getConfig().getString("returning-player.title-settings.bedrock.subtitle")
+                );
         gradientSpeed = getConfig().getDouble("gradient.speed");
         color1 = getConfig().getString("gradient.color-1");
         color2 = getConfig().getString("gradient.color-2");

@@ -38,8 +38,12 @@ public class MainListener implements Listener {
         } else {
             config = ConfigManager.getReturning();
         }
-        if (Bukkit.getPluginManager().isPluginEnabled("floodgate") && FloodgateApi.getInstance().isFloodgatePlayer(event.getPlayer().getUniqueId()))
-            return;
+        if (Bukkit.getPluginManager().isPluginEnabled("floodgate") && FloodgateApi.getInstance().isFloodgatePlayer(event.getPlayer().getUniqueId())) {
+            if (config.isEnableBedrockTitle()) {
+                TitleManager.showTitle(event.getPlayer(), config.getBedrockTitle(), config.getBedrockSubtitle(), config.getFadeIn(), config.getTitleDuration(), config.getFadeOut());
+                return;
+            }
+        }
         boolean showTitle = config.isEnableTitle();
         if (showTitle) {
             TitleManager.showTitle(event.getPlayer(), config.getTitle(), config.getSubtitle(), config.getFadeIn(), config.getTitleDuration(), config.getFadeOut());

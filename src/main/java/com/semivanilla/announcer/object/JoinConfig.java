@@ -16,4 +16,7 @@ public class JoinConfig {
 
     private String soundName, source;
     private double pitch, volume;
+
+    private boolean enableBedrockTitle;
+    private String bedrockTitle, bedrockSubtitle;
 }

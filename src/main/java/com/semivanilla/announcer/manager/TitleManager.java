@@ -20,17 +20,28 @@ public class TitleManager {
     @Getter
     private static final Map<UUID, TitleInfo> titles = new ConcurrentHashMap<>();
 
-    public static void showTitle(Player player, String title, String subtitle, long fadeIn, int stay, long fadeOut) {
+    public static void showTitle(Player player, String title, String subtitle, long fadeIn, int stay, long fadeOut, boolean animate) {
         final String rawTitle = title, rawSubtitle = subtitle;
-        Animation animation = new GradientAnimation();
-        Component title1 = parseTitle(title, animation);
-        Component subtitle1 = parseTitle(subtitle, animation);
-        showTitle(player, title1, subtitle1, fadeIn, stay, fadeOut);
-        long ticksLeft = stay * 20L;
-        TitleInfo info = new TitleInfo(title, subtitle, rawTitle, rawSubtitle, animation, ticksLeft, player.getUniqueId(), stay, fadeIn, fadeOut);
-        titles.put(player.getUniqueId(), info);
-    }
+        if (animate) {
+            Animation animation = new GradientAnimation();
+            Component title1 = parseTitle(title, animation);
+            Component subtitle1 = parseTitle(subtitle, animation);
+            showTitle(player, title1, subtitle1, fadeIn, stay, fadeOut);
+            long ticksLeft = stay * 20L;
+            TitleInfo info = new TitleInfo(title, subtitle, rawTitle, rawSubtitle, animation, ticksLeft, player.getUniqueId(), stay, fadeIn, fadeOut);
+            titles.put(player.getUniqueId(), info);
 
+        }else {
+            Component title1 = Announcer.getMiniMessage().deserialize(title);
+            Component subtitle1 = Announcer.getMiniMessage().deserialize(subtitle);
+            Title.Times times = Title.Times.times(Duration.ofMillis(fadeIn), Duration.ofSeconds(stay), Duration.ofMillis(fadeOut));
+            Title t = Title.title(title1, subtitle1, times);
+            player.showTitle(t);
+        }
+    }
+    public static void showTitle(Player player, String title, String subtitle, long fadeIn, int stay, long fadeOut) {
+        showTitle(player, title, subtitle, fadeIn, stay, fadeOut,true);
+    }
     public static void update(TitleInfo info) {
         if (Bukkit.getPlayer(info.getUuid()) == null) {
             UUIDUtil.remove(titles, info.getUuid());

@@ -30,18 +30,13 @@ public class TitleManager {
             long ticksLeft = stay * 20L;
             TitleInfo info = new TitleInfo(title, subtitle, rawTitle, rawSubtitle, animation, ticksLeft, player.getUniqueId(), stay, fadeIn, fadeOut);
             titles.put(player.getUniqueId(), info);
-
-        }else {
-            Component title1 = Announcer.getMiniMessage().deserialize(title);
-            Component subtitle1 = Announcer.getMiniMessage().deserialize(subtitle);
-            Title.Times times = Title.Times.times(Duration.ofMillis(fadeIn), Duration.ofSeconds(stay), Duration.ofMillis(fadeOut));
-            Title t = Title.title(title1, subtitle1, times);
-            player.showTitle(t);
+        } else {
+            Component title1 = parseTitle(title);
+            Component subtitle1 = parseTitle(subtitle);
+            showTitle(player, title1, subtitle1, fadeIn, stay, fadeOut);
         }
     }
-    public static void showTitle(Player player, String title, String subtitle, long fadeIn, int stay, long fadeOut) {
-        showTitle(player, title, subtitle, fadeIn, stay, fadeOut,true);
-    }
+
     public static void update(TitleInfo info) {
         if (Bukkit.getPlayer(info.getUuid()) == null) {
             UUIDUtil.remove(titles, info.getUuid());
@@ -69,6 +64,10 @@ public class TitleManager {
                 title = title.replace("<animate>", "<gradient:" + ConfigManager.getColor1() + ":" + ConfigManager.getColor2() + ":" + ConfigManager.getColor3() + ":" + animation.nextValue() + ">").replace("</animate>", "</gradient>");
             else throw new RuntimeException("Missing closing animate tag (</animate> expected)");
         }
+        return parseTitle(title);
+    }
+
+    public static Component parseTitle(String title) {
         return Announcer.getMiniMessage().deserialize(title);
     }
 

@@ -19,6 +19,9 @@ returning-player:
     subtitle: 'The Adventure Continues'
     bedrock:
       enable: true
+      fade-in: 500
+      fade-out: 500
+      duration-seconds: 4
       title: 'SemiVanilla MC'
       subtitle: 'The Adventure Continues'
   join-sounds:
@@ -37,6 +40,9 @@ new-player:
     subtitle: 'The Adventure Begins'
     bedrock:
       enable: true
+      fade-in: 500
+      fade-out: 500
+      duration-seconds: 4
       title: 'SemiVanilla MC'
       subtitle: 'The Adventure Begins'
   join-sounds:

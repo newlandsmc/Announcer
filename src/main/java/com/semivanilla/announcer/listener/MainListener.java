@@ -32,21 +32,20 @@ public class MainListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent event) {
         JoinConfig config;
-        if (UUIDUtil.contains(newPlayers, event.getPlayer().getUniqueId())) {
-            UUIDUtil.remove(newPlayers, event.getPlayer().getUniqueId());
+        if (UUIDUtil.remove(newPlayers, event.getPlayer().getUniqueId())) {
             config = ConfigManager.getNewPlayer();
         } else {
             config = ConfigManager.getReturning();
         }
         if (Bukkit.getPluginManager().isPluginEnabled("floodgate") && FloodgateApi.getInstance().isFloodgatePlayer(event.getPlayer().getUniqueId())) {
             if (config.isEnableBedrockTitle()) {
-                TitleManager.showTitle(event.getPlayer(), config.getBedrockTitle(), config.getBedrockSubtitle(), config.getFadeIn(), config.getTitleDuration(), config.getFadeOut());
+                TitleManager.showTitle(event.getPlayer(), config.getBedrockTitle(), config.getBedrockSubtitle(), config.getFadeInBedrock(), config.getBedrockDuration(), config.getFadeOutBedrock(), false);
                 return;
             }
         }
         boolean showTitle = config.isEnableTitle();
         if (showTitle) {
-            TitleManager.showTitle(event.getPlayer(), config.getTitle(), config.getSubtitle(), config.getFadeIn(), config.getTitleDuration(), config.getFadeOut());
+            TitleManager.showTitle(event.getPlayer(), config.getTitle(), config.getSubtitle(), config.getFadeIn(), config.getTitleDuration(), config.getFadeOut(), true);
         }
         if (config.isEnableSound()) {
             Sound sound = null;

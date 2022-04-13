@@ -6,6 +6,7 @@ import com.semivanilla.announcer.animation.impl.GradientAnimation;
 import com.semivanilla.announcer.object.TitleInfo;
 import com.semivanilla.announcer.util.UUIDUtil;
 import lombok.Getter;
+import net.badbird5907.blib.util.Tasks;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
@@ -34,6 +35,9 @@ public class TitleManager {
             Component title1 = parseTitle(title);
             Component subtitle1 = parseTitle(subtitle);
             showTitle(player, title1, subtitle1, fadeIn, stay, fadeOut);
+            Tasks.runLater(() -> { // We need to send the title twice because bedrock or geyser bug
+                showTitle(player, title1, subtitle1, fadeIn, stay, fadeOut);
+            },5l);
         }
     }
 

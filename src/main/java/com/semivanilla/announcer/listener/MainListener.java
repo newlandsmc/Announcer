@@ -4,6 +4,7 @@ import com.semivanilla.announcer.manager.ConfigManager;
 import com.semivanilla.announcer.manager.TitleManager;
 import com.semivanilla.announcer.object.JoinConfig;
 import com.semivanilla.announcer.util.UUIDUtil;
+import net.badbird5907.blib.util.Tasks;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;
@@ -39,7 +40,9 @@ public class MainListener implements Listener {
         }
         if (Bukkit.getPluginManager().isPluginEnabled("floodgate") && FloodgateApi.getInstance().isFloodgatePlayer(event.getPlayer().getUniqueId())) {
             if (config.isEnableBedrockTitle()) {
-                TitleManager.showTitle(event.getPlayer(), config.getBedrockTitle(), config.getBedrockSubtitle(), config.getFadeInBedrock(), config.getBedrockDuration(), config.getFadeOutBedrock(), false);
+                Tasks.runLater(()->{
+                    TitleManager.showTitle(event.getPlayer(), config.getBedrockTitle(), config.getBedrockSubtitle(), config.getFadeInBedrock(), config.getBedrockDuration(), config.getFadeOutBedrock(), false);
+                }, 50l);
                 return;
             }
         }

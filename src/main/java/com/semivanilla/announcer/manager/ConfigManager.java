@@ -33,6 +33,7 @@ public class ConfigManager {
     private static int index = -1;
 
     public static String getNextMessage() {
+        if (messages.isEmpty()) return null;
         if (!randomOrder) {
             index++;
             if (index >= messages.size()) {

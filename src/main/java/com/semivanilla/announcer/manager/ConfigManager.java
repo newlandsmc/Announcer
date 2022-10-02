@@ -71,26 +71,40 @@ public class ConfigManager {
                 getConfig().getBoolean("new-player.join-sounds.enabled"),
                 getConfig().getBoolean("new-player.title-settings.enabled"),
                 getConfig().getInt("new-player.title-settings.duration-seconds"),
+                getConfig().getInt("new-player.title-settings.bedrock.duration-seconds"),
                 getConfig().getLong("new-player.title-settings.fade-in"),
                 getConfig().getLong("new-player.title-settings.fade-out"),
+                getConfig().getLong("new-player.title-settings.bedrock.fade-in"),
+                getConfig().getLong("new-player.title-settings.bedrock.fade-out"),
                 getConfig().getString("new-player.title-settings.title"),
                 getConfig().getString("new-player.title-settings.subtitle"),
                 getConfig().getString("new-player.join-sounds.name"),
                 getConfig().getString("new-player.join-sounds.source"),
                 getConfig().getDouble("new-player.join-sounds.pitch"),
-                getConfig().getDouble("new-player.join-sounds.volume"));
+                getConfig().getDouble("new-player.join-sounds.volume"),
+                getConfig().getBoolean("new-player.title-settings.bedrock.enable"),
+                getConfig().getString("new-player.title-settings.bedrock.title"),
+                getConfig().getString("new-player.title-settings.bedrock.subtitle")
+                );
         returning = new JoinConfig(
                 getConfig().getBoolean("returning-player.join-sounds.enabled"),
                 getConfig().getBoolean("returning-player.title-settings.enabled"),
                 getConfig().getInt("returning-player.title-settings.duration-seconds"),
+                getConfig().getInt("returning-player.title-settings.bedrock.duration-seconds"),
                 getConfig().getLong("returning-player.title-settings.fade-in"),
                 getConfig().getLong("returning-player.title-settings.fade-out"),
+                getConfig().getLong("returning-player.title-settings.bedrock.fade-in"),
+                getConfig().getLong("returning-player.title-settings.bedrock.fade-out"),
                 getConfig().getString("returning-player.title-settings.title"),
                 getConfig().getString("returning-player.title-settings.subtitle"),
                 getConfig().getString("returning-player.join-sounds.name"),
                 getConfig().getString("returning-player.join-sounds.source"),
                 getConfig().getDouble("returning-player.join-sounds.pitch"),
-                getConfig().getDouble("returning-player.join-sounds.volume"));
+                getConfig().getDouble("returning-player.join-sounds.volume"),
+                getConfig().getBoolean("returning-player.title-settings.bedrock.enable"),
+                getConfig().getString("returning-player.title-settings.bedrock.title"),
+                getConfig().getString("returning-player.title-settings.bedrock.subtitle")
+                );
         gradientSpeed = getConfig().getDouble("gradient.speed");
         color1 = getConfig().getString("gradient.color-1");
         color2 = getConfig().getString("gradient.color-2");

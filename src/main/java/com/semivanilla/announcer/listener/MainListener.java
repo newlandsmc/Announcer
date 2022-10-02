@@ -4,6 +4,7 @@ import com.semivanilla.announcer.manager.ConfigManager;
 import com.semivanilla.announcer.manager.TitleManager;
 import com.semivanilla.announcer.object.JoinConfig;
 import com.semivanilla.announcer.util.UUIDUtil;
+import net.badbird5907.blib.util.Tasks;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;
@@ -11,6 +12,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.geysermc.floodgate.api.FloodgateApi;
 
 import java.io.File;
 import java.util.Set;
@@ -31,14 +33,22 @@ public class MainListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent event) {
         JoinConfig config;
-        if (UUIDUtil.contains(newPlayers, event.getPlayer().getUniqueId())) {
-            UUIDUtil.remove(newPlayers, event.getPlayer().getUniqueId());
+        if (UUIDUtil.remove(newPlayers, event.getPlayer().getUniqueId())) {
             config = ConfigManager.getNewPlayer();
         } else {
             config = ConfigManager.getReturning();
         }
-        if (config.isEnableTitle()) {
-            TitleManager.showTitle(event.getPlayer(), config.getTitle(), config.getSubtitle(), config.getFadeIn(), config.getTitleDuration(), config.getFadeOut());
+        if (Bukkit.getPluginManager().isPluginEnabled("floodgate") && FloodgateApi.getInstance().isFloodgatePlayer(event.getPlayer().getUniqueId())) {
+            if (config.isEnableBedrockTitle()) {
+                Tasks.runLater(()->{
+                    TitleManager.showTitle(event.getPlayer(), config.getBedrockTitle(), config.getBedrockSubtitle(), config.getFadeInBedrock(), config.getBedrockDuration(), config.getFadeOutBedrock(), false);
+                }, 50l);
+                return;
+            }
+        }
+        boolean showTitle = config.isEnableTitle();
+        if (showTitle) {
+            TitleManager.showTitle(event.getPlayer(), config.getTitle(), config.getSubtitle(), config.getFadeIn(), config.getTitleDuration(), config.getFadeOut(), true);
         }
         if (config.isEnableSound()) {
             Sound sound = null;

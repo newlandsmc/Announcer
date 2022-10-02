@@ -10,10 +10,13 @@ import lombok.Setter;
 public class JoinConfig {
     private boolean enableSound, enableTitle;
 
-    private int titleDuration;
-    private long fadeIn, fadeOut;
+    private int titleDuration, bedrockDuration;
+    private long fadeIn, fadeOut, fadeInBedrock, fadeOutBedrock;
     private String title, subtitle;
 
     private String soundName, source;
     private double pitch, volume;
+
+    private boolean enableBedrockTitle;
+    private String bedrockTitle, bedrockSubtitle;
 }

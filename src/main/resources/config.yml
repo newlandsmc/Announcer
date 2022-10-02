@@ -17,6 +17,13 @@ returning-player:
     fade-out: 500
     title: '<animate>SemiVanilla MC</animate>'
     subtitle: 'The Adventure Continues'
+    bedrock:
+      enable: true
+      fade-in: 500
+      fade-out: 500
+      duration-seconds: 4
+      title: 'SemiVanilla MC'
+      subtitle: 'The Adventure Continues'
   join-sounds:
     enabled: true
     name: 'ui.toast.challenge_complete'
@@ -31,6 +38,13 @@ new-player:
     fade-out: 500
     title: '<animate>SemiVanilla MC</animate>'
     subtitle: 'The Adventure Begins'
+    bedrock:
+      enable: true
+      fade-in: 500
+      fade-out: 500
+      duration-seconds: 4
+      title: 'SemiVanilla MC'
+      subtitle: 'The Adventure Begins'
   join-sounds:
     enabled: true
     name: 'UI_TOAST_CHALLENGE_COMPLETE'

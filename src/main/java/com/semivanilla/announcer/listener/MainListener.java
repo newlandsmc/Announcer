@@ -3,7 +3,6 @@ package com.semivanilla.announcer.listener;
 import com.semivanilla.announcer.manager.ConfigManager;
 import com.semivanilla.announcer.manager.TitleManager;
 import com.semivanilla.announcer.object.JoinConfig;
-import com.semivanilla.announcer.util.UUIDUtil;
 import net.badbird5907.blib.util.Tasks;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -33,14 +32,14 @@ public class MainListener implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void onJoin(PlayerJoinEvent event) {
         JoinConfig config;
-        if (UUIDUtil.remove(newPlayers, event.getPlayer().getUniqueId())) {
+        if (newPlayers.remove(event.getPlayer().getUniqueId())) {
             config = ConfigManager.getNewPlayer();
         } else {
             config = ConfigManager.getReturning();
         }
         if (Bukkit.getPluginManager().isPluginEnabled("floodgate") && FloodgateApi.getInstance().isFloodgatePlayer(event.getPlayer().getUniqueId())) {
             if (config.isEnableBedrockTitle()) {
-                Tasks.runLater(()->{
+                Tasks.runLater(() -> {
                     TitleManager.showTitle(event.getPlayer(), config.getBedrockTitle(), config.getBedrockSubtitle(), config.getFadeInBedrock(), config.getBedrockDuration(), config.getFadeOutBedrock(), false);
                 }, 50l);
                 return;

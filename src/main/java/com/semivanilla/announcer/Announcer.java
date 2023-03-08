@@ -20,6 +20,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
+import org.geysermc.floodgate.api.FloodgateApi;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -67,7 +68,17 @@ public final class Announcer extends JavaPlugin {
                 UUID uuid = UUID.fromString(uuidString);
                 Player p = Bukkit.getPlayer(uuid);
                 if (p == null) return;
+
                 JoinConfig config = firstJoin ? ConfigManager.getNewPlayer() : ConfigManager.getReturning();
+                if (Bukkit.getPluginManager().isPluginEnabled("floodgate") && FloodgateApi.getInstance().isFloodgatePlayer(p.getUniqueId())) {
+                    if (config.isEnableBedrockTitle()) {
+                        Tasks.runLater(() -> {
+                            TitleManager.showTitle(p, config.getBedrockTitle(), config.getBedrockSubtitle(), config.getFadeInBedrock(), config.getBedrockDuration(), config.getFadeOutBedrock(), false);
+                        }, 50l);
+                        return;
+                    }
+                }
+
                 TitleManager.showTitle(player, config.getTitle(), config.getSubtitle(), config.getFadeIn(), config.getTitleDuration(), config.getFadeOut(), true);
                 if (config.isEnableSound()) {
                     Sound sound = null;

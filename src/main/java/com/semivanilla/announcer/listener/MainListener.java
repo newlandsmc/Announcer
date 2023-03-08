@@ -38,7 +38,7 @@ public class MainListener implements Listener {
             config = ConfigManager.getReturning();
         }
         if (Bukkit.getPluginManager().isPluginEnabled("floodgate") && FloodgateApi.getInstance().isFloodgatePlayer(event.getPlayer().getUniqueId())) {
-            if (config.isEnableBedrockTitle()) {
+            if (config.isEnableBedrockTitle() && !ConfigManager.isEnableBungee()) {
                 Tasks.runLater(() -> {
                     TitleManager.showTitle(event.getPlayer(), config.getBedrockTitle(), config.getBedrockSubtitle(), config.getFadeInBedrock(), config.getBedrockDuration(), config.getFadeOutBedrock(), false);
                 }, 50l);

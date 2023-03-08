@@ -45,7 +45,7 @@ public class MainListener implements Listener {
                 return;
             }
         }
-        boolean showTitle = config.isEnableTitle();
+        boolean showTitle = config.isEnableTitle() && !ConfigManager.isEnableBungee();
         if (showTitle) {
             TitleManager.showTitle(event.getPlayer(), config.getTitle(), config.getSubtitle(), config.getFadeIn(), config.getTitleDuration(), config.getFadeOut(), true);
         }

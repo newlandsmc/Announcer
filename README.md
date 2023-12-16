@@ -1,7 +1,9 @@
 # Announcer
 
+# Development will continue on [Badbird5907/Announcer](https://github.com/Badbird5907/Announcer)
+
 # Authors
-[Badbird5907](https://github.com/Badbird-5907), SemiVanillaMC
+[Badbird5907](https://github.com/Badbird5907), SemiVanillaMC
 
 # Config
 Announcer uses [MiniMessage](https://docs.adventure.kyori.net/minimessage#format) to format messages.
